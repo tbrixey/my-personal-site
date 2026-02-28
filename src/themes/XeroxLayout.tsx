@@ -17,9 +17,7 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
     <div class="xerox">
       <header class="xerox__header">
         <h1 class="xerox__name">TREVOR BRIXEY</h1>
-        <p class="xerox__tagline">
-          SOFTWARE DEVELOPER — MAKES THINGS FOR SCREENS
-        </p>
+        <p class="xerox__tagline">MAKING THINGS FOR SCREENS</p>
       </header>
 
       <main class="xerox__main">

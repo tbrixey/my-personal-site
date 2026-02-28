@@ -1,28 +1,182 @@
+/* ============================================================
+   GOOGLE FONTS
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
 @import 'tailwindcss';
+
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  color: #fff;
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  background-image: linear-gradient(to bottom, #020917, #101725);
-}
-
-.content {
-  display: flex;
+  padding: 0;
   min-height: 100vh;
-  line-height: 1.1;
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
+  -webkit-font-smoothing: antialiased;
 }
 
-.content h1 {
-  font-size: 3.6rem;
+a {
+  color: inherit;
+}
+
+/* ============================================================
+   XEROX — Brutalist Photocopy
+   ============================================================ */
+body {
+  --bg: #f2f0e8;
+  --fg: #111;
+  --accent: #d42b2b;
+  --font: 'Courier Prime', 'Courier New', monospace;
+
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+}
+
+.xerox {
+  max-width: 900px;
+  padding: 3rem 2rem 4rem;
+}
+
+.xerox__header {
+  margin-bottom: 3rem;
+}
+
+.xerox__name {
+  font-family: var(--font);
+  font-size: clamp(4rem, 10vw, 8rem);
   font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  margin: 0;
+  white-space: nowrap;
+  overflow: visible;
 }
 
-.content p {
-  font-size: 1.2rem;
-  font-weight: 400;
+.xerox__tagline {
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  margin-top: 1rem;
+  transform: rotate(-1.5deg);
+  transform-origin: left;
+}
+
+.xerox__section-title {
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  border-bottom: 3px solid var(--fg);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  margin-top: 3rem;
+}
+
+.xerox__body {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+.xerox__ledger {
+  width: 100%;
+}
+
+.xerox__ledger-header {
+  display: grid;
+  grid-template-columns: 4rem 1fr 7rem 1fr;
+  gap: 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  border-bottom: 3px solid var(--fg);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0;
+}
+
+.xerox__ledger-row {
+  display: grid;
+  grid-template-columns: 4rem 1fr 7rem 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 2px solid var(--fg);
+  align-items: start;
+}
+
+.xerox__ledger-row:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.xerox__year {
+  font-size: 0.85rem;
+}
+
+.xerox__title a {
+  text-decoration: none;
+  border-bottom: 2px solid var(--accent);
+}
+
+.xerox__desc {
+  display: block;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+  opacity: 0.7;
+  transform: rotate(-0.5deg);
+}
+
+.xerox__tags {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+
+.xerox-stamp {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.xerox-stamp--shipped {
+  color: var(--accent);
+}
+
+.xerox-stamp--wip {
+  border: 2px solid var(--fg);
+  padding: 0.1rem 0.3rem;
+}
+
+.xerox-stamp--experiment {
+  opacity: 0.6;
+}
+
+.xerox-stamp--abandoned {
+  text-decoration: line-through;
   opacity: 0.5;
+}
+
+.xerox__contact {
+  margin-top: 2rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .xerox__name {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .xerox__ledger-header,
+  .xerox__ledger-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .xerox__ledger-header span:nth-child(n + 2) {
+    display: none;
+  }
 }

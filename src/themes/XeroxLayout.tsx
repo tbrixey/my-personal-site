@@ -1,14 +1,28 @@
 import type { Project } from '../types';
 
-function StatusStamp({ status }: { status: Project['status'] }) {
+const STAMP_TILTS = [-3, -1, 1, 2];
+
+function StatusStamp({
+  status,
+  tiltIndex = 0,
+}: {
+  status: Project['status'];
+  tiltIndex?: number;
+}) {
   const map: Record<Project['status'], string> = {
-    shipped: 'SHIPPED',
+    live: 'LIVE',
     wip: 'WIP',
     experiment: 'EXPERIMENT',
-    abandoned: 'DEAD',
+    dead: 'DEAD',
   };
+  const rotation = STAMP_TILTS[tiltIndex % STAMP_TILTS.length];
   return (
-    <span class={`xerox-stamp xerox-stamp--${status}`}>[{map[status]}]</span>
+    <span
+      class={`xerox-stamp xerox-stamp--${status}`}
+      style={{ transform: `rotate(${rotation}deg)` }}
+    >
+      [{map[status]}]
+    </span>
   );
 }
 
@@ -40,7 +54,7 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
         </section>
 
         <section class="xerox__projects">
-          <h2 class="xerox__section-title">PROJECT LEDGER - TBD</h2>
+          <h2 class="xerox__section-title">PROJECT LEDGER</h2>
           <div class="xerox__ledger">
             <div class="xerox__ledger-header">
               <span>YEAR</span>
@@ -48,25 +62,27 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
               <span>STATUS</span>
               <span>TAGS</span>
             </div>
-            {/* {projects.map((p) => (
+            {projects.map((p, index) => (
               <div key={p.id} class="xerox__ledger-row">
                 <span class="xerox__year">{p.year}</span>
                 <span class="xerox__title">
                   {p.url ? (
-                    <a href={p.url}>{p.title.toUpperCase()}</a>
+                    <a href={p.url} target="_blank" rel="noopener noreferrer">
+                      {p.title.toUpperCase()}
+                    </a>
                   ) : (
                     p.title.toUpperCase()
                   )}
                   <span class="xerox__desc">{p.description}</span>
                 </span>
                 <span>
-                  <StatusStamp status={p.status} />
+                  <StatusStamp status={p.status} tiltIndex={index} />
                 </span>
                 <span class="xerox__tags">
                   {p.tags.join(', ').toUpperCase()}
                 </span>
               </div>
-            ))} */}
+            ))}
           </div>
         </section>
 

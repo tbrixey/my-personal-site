@@ -2,60 +2,59 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
-    id: 'raytracer',
-    title: 'Tiny Raytracer',
+    id: 'Clientelity Scheduling',
+    title: 'Clientelity Scheduling',
+    year: 2026,
+    description:
+      'Clientelity Scheduling. A tool for target for small business owners with little friction on the client side.',
+    status: 'live',
+    tags: [
+      'typescript',
+      'React',
+      'PostgreSQL',
+      'Tailwind',
+      'React-Native',
+      'Hono.js',
+    ],
+    url: 'https://scheduling.clientelity.com',
+  },
+  {
+    id: 'Clientelity CRM',
+    title: 'Clientelity Loop (CRM)',
+    year: 2026,
+    description:
+      'Loop is a CRM tool for small business owners with little friction on the client side.',
+    status: 'live',
+    tags: ['typescript', 'React', 'PostgreSQL', 'Tailwind', 'Hono.js'],
+    url: 'https://loop.clientelity.com',
+  },
+  {
+    id: 'The Temporary Plane',
+    title: 'The Temporary Plane',
     year: 2025,
-    description:
-      'A weekend raytracer that got out of hand. Renders spheres, reflections, and soft shadows in pure Rust. Accidentally learned linear algebra.',
-    status: 'shipped',
-    tags: ['rust', 'graphics', 'math'],
-    url: '#',
-  },
-  {
-    id: 'budgetron',
-    title: 'Budgetron 3000',
-    year: 2025,
-    description:
-      'Personal finance tracker that guilt-trips you with passive-aggressive charts. "You spent HOW much on coffee?"',
-    status: 'shipped',
-    tags: ['typescript', 'preact', 'sqlite'],
-    url: '#',
-  },
-  {
-    id: 'socketpong',
-    title: 'Socket Pong',
-    year: 2024,
-    description:
-      'Multiplayer pong over WebSockets. Latency is the real opponent. Surprisingly competitive at 3am.',
-    status: 'shipped',
-    tags: ['websockets', 'canvas', 'node'],
-  },
-  {
-    id: 'gpt-dungeon',
-    title: 'GPT Dungeon Master',
-    year: 2024,
-    description:
-      'Text adventure powered by LLMs. The AI keeps trying to kill the player. Working as intended.',
+    description: 'The Temporary Plane is a text/api based game.',
     status: 'wip',
-    tags: ['ai', 'python', 'flask'],
-  },
-  {
-    id: 'css-crimes',
-    title: 'CSS Crimes',
-    year: 2023,
-    description:
-      'A collection of cursed CSS experiments. Pure CSS accordion that works in IE6. Single-div Mona Lisa. The police have been notified.',
-    status: 'experiment',
-    tags: ['css', 'art', 'cursed'],
+    tags: ['typescript', 'React', 'MongoDB', 'Tailwind', 'Hono.js'],
     url: '#',
   },
   {
-    id: 'startup-namer',
-    title: 'Startup Name Generator',
+    id: 'Receipt Printer to-do app',
+    title: 'Receipt Printer to-do app',
+    year: 2024,
+    description:
+      'I hosted a Raspberry Pi with a receipt printer and a to-do app. Add a to-do and it printed it to a printer I had in my office.',
+    status: 'experiment',
+    tags: ['typescript', 'Next.js', 'PostgreSQL', 'Tailwind', 'Raspberry Pi'],
+    url: 'https://github.com/tbrixey/todo-receipt-printer',
+  },
+  {
+    id: 'Pokemon Card Reader',
+    title: 'Pokemon Card Reader',
     year: 2023,
     description:
-      'Markov chain trained on YC companies. Generated "Uber for Uber" and I knew it was perfect. Abandoned after achieving peak comedy.',
-    status: 'abandoned',
-    tags: ['python', 'ml', 'comedy'],
+      'I built a Pokemon Card Reader using OpenCV and a Raspberry Pi. It reads the card and displays the information on a screen.',
+    status: 'dead',
+    tags: ['python', 'OpenCV', 'Raspberry Pi'],
+    url: 'https://github.com/tbrixey/PokemonCardReader-OpenCV',
   },
 ];

@@ -1,6 +1,6 @@
 export type ThemeName = 'xerox';
 
-export type ProjectStatus = 'shipped' | 'wip' | 'experiment' | 'abandoned';
+export type ProjectStatus = 'live' | 'wip' | 'experiment' | 'dead';
 
 export interface Project {
   id: string;

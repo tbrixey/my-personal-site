@@ -42,7 +42,7 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
         </section>
 
         <section class="xerox__projects">
-          <h2 class="xerox__section-title">PROJECT LEDGER</h2>
+          <h2 class="xerox__section-title">PROJECT LEDGER - TBD</h2>
           <div class="xerox__ledger">
             <div class="xerox__ledger-header">
               <span>YEAR</span>
@@ -50,7 +50,7 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
               <span>STATUS</span>
               <span>TAGS</span>
             </div>
-            {projects.map((p) => (
+            {/* {projects.map((p) => (
               <div key={p.id} class="xerox__ledger-row">
                 <span class="xerox__year">{p.year}</span>
                 <span class="xerox__title">
@@ -68,16 +68,15 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
                   {p.tags.join(', ').toUpperCase()}
                 </span>
               </div>
-            ))}
+            ))} */}
           </div>
         </section>
 
         <section class="xerox__contact">
           <h2 class="xerox__section-title">SIGNAL ME</h2>
           <p class="xerox__body">
-            <a href="https://github.com/username">GITHUB</a> —{' '}
-            <a href="https://linkedin.com/in/username">LINKEDIN</a> —{' '}
-            <a href="mailto:you@example.com">EMAIL</a>
+            <a href="https://github.com/tbrixey">GITHUB</a> —{' '}
+            <a href="https://www.linkedin.com/in/trevor-brixey">LINKEDIN</a>
           </p>
         </section>
       </main>

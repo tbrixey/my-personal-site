@@ -17,6 +17,7 @@ export const projects: Project[] = [
       'Hono.js',
     ],
     url: 'https://scheduling.clientelity.com',
+    company: 'Clientelity',
   },
   {
     id: 'Clientelity CRM',
@@ -27,6 +28,7 @@ export const projects: Project[] = [
     status: 'live',
     tags: ['typescript', 'React', 'PostgreSQL', 'Tailwind', 'Hono.js'],
     url: 'https://loop.clientelity.com',
+    company: 'Clientelity',
   },
   {
     id: 'The Temporary Plane',

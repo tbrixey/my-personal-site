@@ -10,4 +10,6 @@ export interface Project {
   status: ProjectStatus;
   tags: string[];
   url?: string;
+  /** Company/brand (e.g. "Clientelity") for products under a business umbrella */
+  company?: string;
 }

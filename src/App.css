@@ -67,6 +67,28 @@ body {
   transform-origin: left;
 }
 
+.xerox__tagline--sub {
+  margin-top: 0.25rem;
+  transform: rotate(0.5deg);
+}
+
+.xerox__clientelity-link {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.xerox__clientelity-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.xerox__footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--fg);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+
 .xerox__section-title {
   font-size: 1rem;
   letter-spacing: 0.2em;
@@ -126,6 +148,16 @@ body {
   margin-top: 0.4rem;
   opacity: 0.7;
   transform: rotate(-0.5deg);
+}
+
+.xerox__company-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--fg);
+  opacity: 0.8;
 }
 
 .xerox__tags {

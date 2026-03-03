@@ -31,17 +31,29 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
     <div class="xerox">
       <header class="xerox__header">
         <h1 class="xerox__name">TREVOR BRIXEY</h1>
-        <p class="xerox__tagline">MAKING THINGS FOR SCREENS</p>
+        <p class="xerox__tagline">
+          FOUNDER OF{' '}
+          <a
+            href="https://clientelity.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="xerox__clientelity-link"
+          >
+            CLIENTELITY LLC
+          </a>
+        </p>
+        <p class="xerox__tagline xerox__tagline--sub">MAKING THINGS FOR SCREENS</p>
       </header>
 
       <main class="xerox__main">
         <section class="xerox__about">
           <h2 class="xerox__section-title">RE: WHO IS THIS</h2>
           <p class="xerox__body">
-            Staff software engineer. 10+ years building scalable web and mobile
-            systems. React, TypeScript, AWS serverless, Node.js. Bridges
-            technical strategy with business outcomes. Learning how to handle AI
-            tools without going insane.
+            Trevor Brixey, founder of Clientelity LLC. Staff software engineer
+            with 10+ years building scalable web and mobile systems. React,
+            TypeScript, AWS serverless, Node.js. Bridges technical strategy with
+            business outcomes. Learning how to handle AI tools without going
+            insane.
           </p>
         </section>
 
@@ -73,6 +85,9 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
                   ) : (
                     p.title.toUpperCase()
                   )}
+                  {p.company && (
+                    <span class="xerox__company-badge">{p.company.toUpperCase()}</span>
+                  )}
                   <span class="xerox__desc">{p.description}</span>
                 </span>
                 <span>
@@ -94,6 +109,10 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
           </p>
         </section>
       </main>
+
+      <footer class="xerox__footer">
+        <span>Trevor Brixey</span>
+      </footer>
     </div>
   );
 }

@@ -5,10 +5,10 @@ import { pluginPreact } from '@rsbuild/plugin-preact';
 export default defineConfig({
   plugins: [pluginPreact()],
   html: (() => {
-    const siteName = 'Trevor Brixey';
+    const siteName = 'Trevor Brixey · Clientelity';
     const title = `${siteName} — Software Developer`;
     const description =
-      'Staff software engineer with 10+ years building scalable web and mobile systems. React, TypeScript, AWS serverless, and Node.js.';
+      'Trevor Brixey, software engineer and founder of Clientelity LLC. 10+ years building scalable web and mobile systems. React, TypeScript, AWS serverless, and Node.js.';
 
     const siteUrl = 'https://trevorbrixey.com';
 

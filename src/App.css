@@ -87,6 +87,54 @@ body {
   border-top: 1px solid var(--fg);
   font-size: 0.85rem;
   letter-spacing: 0.1em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.xerox__visitor-counter {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.6rem;
+  border: 1px dashed var(--fg);
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.xerox__visitor-counter-number {
+  font-weight: 700;
+}
+
+.xerox__visitor-counter::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  transform: translateX(-100%);
+  animation: xerox-scan 2.2s ease-out 0.2s 1;
+  pointer-events: none;
+}
+
+@keyframes xerox-scan {
+  to {
+    transform: translateX(120%);
+  }
 }
 
 .xerox__section-title {

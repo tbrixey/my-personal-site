@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'preact/hooks';
 import type { Project } from '../types';
 
 const STAMP_TILTS = [-3, -1, 1, 2];
@@ -27,6 +28,49 @@ function StatusStamp({
 }
 
 export function XeroxLayout({ projects }: { projects: Project[] }) {
+  const [visitCount, setVisitCount] = useState<number | null>(null);
+  const [visitError, setVisitError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function recordVisit() {
+      try {
+        const res = await fetch(
+          'https://api.clientelity.com/personal-site-visit',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+
+        if (!res.ok) {
+          throw new Error(`Bad status: ${res.status}`);
+        }
+
+        let data: { count: number } | null = null;
+        try {
+          data = (await res.json()) as { count: number };
+          setVisitCount(data.count);
+        } catch {
+          // If the endpoint returns a bare number or empty body, ignore JSON errors.
+        }
+      } catch {
+        if (!cancelled) {
+          setVisitError(true);
+        }
+      }
+    }
+
+    recordVisit();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div class="xerox">
       <header class="xerox__header">
@@ -42,7 +86,9 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
             CLIENTELITY LLC
           </a>
         </p>
-        <p class="xerox__tagline xerox__tagline--sub">MAKING THINGS FOR SCREENS</p>
+        <p class="xerox__tagline xerox__tagline--sub">
+          MAKING THINGS FOR SCREENS
+        </p>
       </header>
 
       <main class="xerox__main">
@@ -86,7 +132,9 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
                     p.title.toUpperCase()
                   )}
                   {p.company && (
-                    <span class="xerox__company-badge">{p.company.toUpperCase()}</span>
+                    <span class="xerox__company-badge">
+                      {p.company.toUpperCase()}
+                    </span>
                   )}
                   <span class="xerox__desc">{p.description}</span>
                 </span>
@@ -112,6 +160,21 @@ export function XeroxLayout({ projects }: { projects: Project[] }) {
 
       <footer class="xerox__footer">
         <span>Trevor Brixey</span>
+        <span class="xerox__visitor-counter">
+          {visitError ? (
+            'VISITOR LOG / COUNTER OFFLINE'
+          ) : visitCount === null ? (
+            'VISITOR LOG / BOOTING COUNTER…'
+          ) : (
+            <>
+              VISITOR LOG / VISIT #
+              <span class="xerox__visitor-counter-number">
+                {String(visitCount).padStart(4, '0')}
+              </span>{' '}
+              (GLOBAL)
+            </>
+          )}
+        </span>
       </footer>
     </div>
   );

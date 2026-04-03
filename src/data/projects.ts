@@ -31,6 +31,19 @@ export const projects: Project[] = [
     company: 'Clientelity',
   },
   {
+    id: 'GOMI-BAKO',
+    title: 'GOMI-BAKO',
+    year: 2026,
+    description: 'A not so garbage, garbage API client.',
+    status: 'live',
+    tags: [
+      'electron',
+      'Like a lot of AI code',
+      'I tried to not look at the code',
+    ],
+    url: 'https://gomibakorest.com',
+  },
+  {
     id: 'The Temporary Plane',
     title: 'The Temporary Plane',
     year: 2025,

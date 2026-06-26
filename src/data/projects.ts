@@ -44,12 +44,21 @@ export const projects: Project[] = [
     url: 'https://gomibakorest.com',
   },
   {
-    id: 'The Temporary Plane',
-    title: 'The Temporary Plane',
-    year: 2025,
-    description: 'The Temporary Plane is a text/api based game.',
+    id: 'Riftbound Assistant',
+    title: 'Riftbound Assistant',
+    year: 2026,
+    description:
+      'Riftbound Assistant is an iOS app that is an AI assistant for the Riftbound TCG. I build context using the rules and cards of the game to help users learn the game and make decisions.',
     status: 'wip',
-    tags: ['typescript', 'React', 'MongoDB', 'Tailwind', 'Hono.js'],
+    tags: [
+      'typescript',
+      'React',
+      'React Native',
+      'Expo',
+      'Cloudflare',
+      'OpenRouter',
+      'Learned what RAG and Vectorization is for AI Agents',
+    ],
     url: '#',
   },
   {

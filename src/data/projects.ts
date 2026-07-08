@@ -49,7 +49,7 @@ export const projects: Project[] = [
     year: 2026,
     description:
       'Riftbound Assistant is an iOS app that is an AI assistant for the Riftbound TCG. I build context using the rules and cards of the game to help users learn the game and make decisions.',
-    status: 'wip',
+    status: 'live',
     tags: [
       'typescript',
       'React',
@@ -59,7 +59,7 @@ export const projects: Project[] = [
       'OpenRouter',
       'Learned what RAG and Vectorization is for AI Agents',
     ],
-    url: '#',
+    url: 'https://riftboundassistant.com',
   },
   {
     id: 'Receipt Printer to-do app',

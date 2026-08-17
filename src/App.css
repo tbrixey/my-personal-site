@@ -1,9 +1,28 @@
 /* ============================================================
-   GOOGLE FONTS
+   GOOGLE FONTS — only external dependency
+   (graceful monospace fallback if this fails)
    ============================================================ */
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 
 @import 'tailwindcss';
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --paper: #f2efe6; /* cream paper */
+  --ink: #191713; /* near-black ink */
+  --ink-soft: #4a463d;
+  --red: #b3231a; /* stamp red — the ONLY accent */
+}
+
+/* REDACTED mode (Konami) inverts paper/ink */
+body.redacted {
+  --paper: #141311;
+  --ink: #e8e4d8;
+  --ink-soft: #a09a8c;
+  --red: #e0402f;
+}
 
 /* ============================================================
    GLOBAL RESET
@@ -12,256 +31,547 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  cursor: crosshair;
+  line-height: 1.5;
+  transition:
+    background 0.4s,
+    color 0.4s;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--red);
+  color: var(--paper);
 }
 
 a {
   color: inherit;
 }
 
-/* ============================================================
-   XEROX — Brutalist Photocopy
-   ============================================================ */
-body {
-  --bg: #f2f0e8;
-  --fg: #111;
-  --accent: #d42b2b;
-  --font: 'Courier Prime', 'Courier New', monospace;
-
-  background-color: var(--bg);
-  color: var(--fg);
-  font-family: var(--font);
-}
-
-.xerox {
-  max-width: 900px;
-  padding: 3rem 2rem 4rem;
-}
-
-.xerox__header {
-  margin-bottom: 3rem;
-}
-
-.xerox__name {
-  font-family: var(--font);
-  font-size: clamp(4rem, 10vw, 8rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  margin: 0;
-  white-space: nowrap;
-  overflow: visible;
-}
-
-.xerox__tagline {
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  margin-top: 1rem;
-  transform: rotate(-1.5deg);
-  transform-origin: left;
-}
-
-.xerox__tagline--sub {
-  margin-top: 0.25rem;
-  transform: rotate(0.5deg);
-}
-
-.xerox__clientelity-link {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.xerox__clientelity-link:hover {
-  text-decoration-thickness: 2px;
-}
-
-.xerox__footer {
-  margin-top: 4rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--fg);
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.xerox__visitor-counter {
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 0.35rem 0.6rem;
-  border: 1px dashed var(--fg);
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent 0,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
-  position: relative;
-  overflow: hidden;
-}
-
-.xerox__visitor-counter-number {
-  font-weight: 700;
-}
-
-.xerox__visitor-counter::after {
+/* Paper grain — fixed full-viewport noise overlay */
+body::before {
   content: '';
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(255, 255, 255, 0.45) 50%,
-    transparent 100%
-  );
-  mix-blend-mode: screen;
-  transform: translateX(-100%);
-  animation: xerox-scan 2.2s ease-out 0.2s 1;
+  z-index: 9990;
   pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-@keyframes xerox-scan {
-  to {
-    transform: translateX(120%);
+/* Content column */
+.col {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ============================================================
+   FILE STRIP (header)
+   ============================================================ */
+.filestrip {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--ink);
+  padding: 14px 0;
+}
+
+.blink {
+  animation: blink 1.1s steps(2, end) infinite;
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
   }
 }
 
-.xerox__section-title {
-  font-size: 1rem;
-  letter-spacing: 0.2em;
-  border-bottom: 3px solid var(--fg);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1.5rem;
-  margin-top: 3rem;
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  padding: 60px 0 28px;
 }
 
-.xerox__body {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  max-width: 60ch;
+.name {
+  font-size: clamp(44px, 9vw, 96px);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.02;
+  letter-spacing: 1px;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
-.xerox__ledger {
+.sc {
+  display: inline-block;
+  min-width: 0.6em;
+  text-align: center;
+}
+
+.tagline {
+  margin-top: 20px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  min-height: 1.4em;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.62em;
+  height: 1.05em;
+  background: var(--ink);
+  margin-left: 5px;
+  vertical-align: text-bottom;
+  animation: blink 1s steps(2, end) infinite;
+}
+
+.subline {
+  margin-top: 16px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.studio-link {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--red);
+  padding-bottom: 1px;
+}
+
+/* ============================================================
+   SECTION HEADINGS + REVEAL
+   ============================================================ */
+.reveal {
+  padding: 40px 0;
+}
+
+.sec-head {
+  font-size: 14px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 22px;
+}
+
+.sec-head::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: var(--ink);
+  transition: width 0.7s cubic-bezier(0.6, 0, 0.2, 1);
+}
+
+.reveal.on .sec-head::after {
   width: 100%;
 }
 
-.xerox__ledger-header {
-  display: grid;
-  grid-template-columns: 4rem 1fr 7rem 1fr;
-  gap: 1rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  border-bottom: 3px solid var(--fg);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0;
+.body {
+  transition:
+    opacity 0.5s ease 0.2s,
+    transform 0.5s ease 0.2s;
 }
 
-.xerox__ledger-row {
-  display: grid;
-  grid-template-columns: 4rem 1fr 7rem 1fr;
-  gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 2px solid var(--fg);
-  align-items: start;
+.reveal:not(.on) > .body {
+  opacity: 0;
+  transform: translateY(14px);
 }
 
-.xerox__ledger-row:hover {
-  background: var(--fg);
-  color: var(--bg);
+.reveal.on > .body {
+  opacity: 1;
+  transform: none;
 }
 
-.xerox__year {
-  font-size: 0.85rem;
-}
-
-.xerox__title a {
-  text-decoration: none;
-  border-bottom: 2px solid var(--accent);
-}
-
-.xerox__desc {
-  display: block;
-  font-size: 0.8rem;
-  margin-top: 0.4rem;
-  opacity: 0.7;
-  transform: rotate(-0.5deg);
-}
-
-.xerox__company-badge {
-  display: inline-block;
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  margin-left: 0.5rem;
-  padding: 0.1rem 0.35rem;
-  border: 1px solid var(--fg);
-  opacity: 0.8;
-}
-
-.xerox__tags {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  opacity: 0.6;
-}
-
-.xerox-stamp {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  display: inline-block;
-  border: 2px solid var(--fg);
-  padding: 0.15rem 0.4rem;
-  transform: rotate(-2deg);
-  transform-origin: center;
-}
-
-.xerox-stamp--live {
-  color: var(--accent);
-}
-
-.xerox-stamp--experiment {
-  opacity: 0.85;
-}
-
-.xerox-stamp--dead {
-  text-decoration: line-through;
-  opacity: 0.5;
-}
-
-.xerox__contact {
-  margin-top: 2rem;
-}
-
-.xerox__contact a {
-  text-decoration: none;
-  border-bottom: 2px solid var(--accent);
+/* Bio */
+.bio {
+  max-width: 46em;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-soft);
 }
 
 /* ============================================================
-   RESPONSIVE
+   TOOLS MARQUEE
    ============================================================ */
-@media (max-width: 768px) {
-  .xerox__name {
-    font-size: clamp(2.5rem, 12vw, 4rem);
-  }
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  padding: 14px 0;
+}
 
-  .xerox__ledger-header,
-  .xerox__ledger-row {
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
-  }
+.mq-track {
+  display: flex;
+  width: max-content;
+  animation: mq 28s linear infinite;
+}
 
-  .xerox__ledger-header span:nth-child(n + 2) {
+.marquee-wrap:hover .mq-track {
+  animation-play-state: paused;
+}
+
+@keyframes mq {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.mq-chunk {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.mq-item {
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0 14px;
+}
+
+.mq-x {
+  color: var(--red);
+  padding: 0 14px;
+}
+
+/* ============================================================
+   PROJECT LEDGER
+   ============================================================ */
+.lg-header,
+.p-row {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 0 16px;
+  align-items: start;
+}
+
+.lg-header {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.p-row {
+  padding: 16px 10px;
+  margin: 0 -10px;
+  border-bottom: 1px solid rgba(25, 23, 19, 0.16);
+  transition: background 0.15s;
+}
+
+body.redacted .p-row {
+  border-bottom-color: rgba(232, 228, 216, 0.16);
+}
+
+.p-row:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.redacted .p-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.p-year {
+  font-size: 13px;
+  padding-top: 2px;
+  color: var(--ink-soft);
+}
+
+.p-title {
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink);
+  text-decoration: none;
+  padding-bottom: 3px;
+  background-image: linear-gradient(var(--red), var(--red));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size 0.3s ease;
+}
+
+.p-title:hover {
+  background-size: 100% 2px;
+}
+
+.p-company {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border: 1px solid var(--ink-soft);
+  padding: 1px 5px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.p-desc {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  max-width: 42em;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.p-tags {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink-soft);
+  margin-top: 10px;
+}
+
+/* Status stamps */
+.stamp {
+  display: inline-block;
+  min-width: 96px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border: 2px solid;
+  padding: 5px 8px;
+  white-space: nowrap;
+  transform: rotate(var(--rot, 0deg));
+}
+
+.st-live {
+  --rot: -3deg;
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.st-exp {
+  --rot: 3deg;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.st-dead {
+  --rot: -2deg;
+  opacity: 0.55;
+  text-decoration: line-through;
+  color: var(--ink-soft);
+  border-color: var(--ink-soft);
+}
+
+/* Rubber-stamp slam entrance (plays when ledger scrolls into view) */
+.ledger:not(.on) .stamp {
+  opacity: 0;
+}
+
+.ledger.on .stamp {
+  animation: slam 0.45s cubic-bezier(0.5, 1.8, 0.4, 0.9) backwards;
+  animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+@keyframes slam {
+  from {
+    opacity: 0;
+    transform: scale(2.6) rotate(-12deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(var(--rot, 0deg));
+  }
+}
+
+/* ============================================================
+   SIGNAL ME (links)
+   ============================================================ */
+.links {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.sig-link {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--red);
+  padding: 4px 2px;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+
+.sig-link:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer.reveal {
+  padding-bottom: 72px;
+}
+
+.barcode {
+  display: flex;
+  align-items: stretch;
+  height: 44px;
+  margin: 8px 0 26px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
+   FIXED HUD
+   ============================================================ */
+.hud {
+  position: fixed;
+  right: 14px;
+  bottom: 12px;
+  z-index: 90;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  pointer-events: none;
+  text-align: right;
+  line-height: 1.6;
+}
+
+.konami-hint {
+  position: fixed;
+  left: 14px;
+  bottom: 12px;
+  z-index: 90;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ============================================================
+   REDACTED FLASH STAMP
+   ============================================================ */
+.flash {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.flash span {
+  font-size: clamp(48px, 15vw, 160px);
+  font-weight: 700;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 6px solid var(--red);
+  padding: 0.15em 0.35em;
+  opacity: 0;
+}
+
+.flash.go span {
+  animation: redflash 0.9s ease forwards;
+}
+
+@keyframes redflash {
+  0% {
+    opacity: 0;
+    transform: scale(3) rotate(-6deg);
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) rotate(-6deg);
+  }
+}
+
+/* ============================================================
+   MOBILE (<640px): ledger collapses, stamp drops under title
+   ============================================================ */
+@media (max-width: 640px) {
+  .lg-header {
     display: none;
+  }
+
+  .p-row {
+    grid-template-columns: 48px 1fr;
+    padding: 14px 8px;
+    margin: 0 -8px;
+  }
+
+  .p-year {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .p-main {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .stamp {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+    margin-top: 10px;
+    min-width: auto;
   }
 }
